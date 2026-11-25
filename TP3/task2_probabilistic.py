@@ -1,44 +1,4 @@
-"""
-LAB 3 - TASK 2: PROBABILISTIC INFORMATION RETRIEVAL MODELS
-USTHB - M2 SII - Information Retrieval - 2026/2027
 
-Implemented models:
-    1. Classic BIR without learning data
-    2. Classic BIR with learning data
-    3. Extended BIR without learning data
-    4. Extended BIR with learning data
-    5. BM25
-
-Uses the Document-Term files generated in LAB 1:
-    <document_id> <term> <frequency> <TF-IDF_weight>
-
-Default expected location:
-    <project_folder>/TP1/results/regex_porter/D1.txt ... D6.txt
-
-Run:
-    python task2_probabilistic.py
-
-IMPORTANT FORMULA NOTE:
-The LAB 3 handout refers to smoothing/probabilistic equations from the
-lecture notes but does not print those equations. This implementation uses
-the standard smoothed Binary Independence Model (BIM) log-odds formula:
-
-    w_i = log( p_i * (1 - u_i) / (u_i * (1 - p_i)) )
-
-Without learning:
-    p_i = 0.5
-    u_i = (n_i + 0.5) / (N + 1)
-
-With learning:
-    p_i = (r_i + 0.5) / (R + 1)
-    u_i = (n_i - r_i + 0.5) / (N - R + 1)
-
-For Extended BIR, each query-term log-odds contribution is multiplied
-by that document's LAB 1 TF-IDF weight for the term. This is an explicit
-implementation choice based on the handout's instruction to use TF-IDF
-document-term weights. If your lecture notes give a different Extended
-BIR equation, replace extended_bir_score() accordingly.
-"""
 
 from pathlib import Path
 from math import log
@@ -544,3 +504,46 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+"""
+LAB 3 - TASK 2: PROBABILISTIC INFORMATION RETRIEVAL MODELS
+USTHB - M2 SII - Information Retrieval - 2026/2027
+
+Implemented models:
+    1. Classic BIR without learning data
+    2. Classic BIR with learning data
+    3. Extended BIR without learning data
+    4. Extended BIR with learning data
+    5. BM25
+
+Uses the Document-Term files generated in LAB 1:
+    <document_id> <term> <frequency> <TF-IDF_weight>
+
+Default expected location:
+    <project_folder>/TP1/results/regex_porter/D1.txt ... D6.txt
+
+Run:
+    python task2_probabilistic.py
+
+IMPORTANT FORMULA NOTE:
+The LAB 3 handout refers to smoothing/probabilistic equations from the
+lecture notes but does not print those equations. This implementation uses
+the standard smoothed Binary Independence Model (BIM) log-odds formula:
+
+    w_i = log( p_i * (1 - u_i) / (u_i * (1 - p_i)) )
+
+Without learning:
+    p_i = 0.5
+    u_i = (n_i + 0.5) / (N + 1)
+
+With learning:
+    p_i = (r_i + 0.5) / (R + 1)
+    u_i = (n_i - r_i + 0.5) / (N - R + 1)
+
+For Extended BIR, each query-term log-odds contribution is multiplied
+by that document's LAB 1 TF-IDF weight for the term. This is an explicit
+implementation choice based on the handout's instruction to use TF-IDF
+document-term weights. If your lecture notes give a different Extended
+BIR equation, replace extended_bir_score() accordingly.
+"""
